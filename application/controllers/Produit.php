@@ -36,10 +36,12 @@ class Produit extends CI_Controller {
 
 		//on verifie si la validation est ok
 
+		// on load le commentaire comment qui va traiter la requete d'insert
+		$this->load->model('Commentaire_model');
+
+
 		if ($this->form_validation->run()==true) 
 		{
-			// on load le commentaire comment qui va traiter la requete d'insert
-			$this->load->model('Commentaire_model');
 
 			$mon_commentaire = 
 			array(
@@ -49,18 +51,20 @@ class Produit extends CI_Controller {
 				'id_produitDScomment'=>$articlebyId->id_produit,
 				'Date_comment'=>date('Y-m-d H:i:s')
 				);
-			var_dump($mon_commentaire);
 			$this->Commentaire_model->insertCommentaire($mon_commentaire);
-			$id_produit=$articlebyId->id_produit;
-			$this->Commentaire_model->trouveCommentparIDProduit($id_produit);
+
+			$this->session->set_flashdata('success_comment', 'Votre commentaire à été ajouté');
+			redirect("produit/detailproduit/".$id_produit);
+
 		}
 		
-
-
-
-		
+		//$id_produit=$articlebyId->id_produit;
+		$commentaires = $this->Commentaire_model->trouveCommentparIDProduit($id_produit);
+				
 		/* on loade la page detail produit avec les infos*/
-		$this->load->view('produit/detailproduit', ['articlebyId'=>$articlebyId]);
+
+		var_dump($commentaires);
+		$this->load->view('produit/detailproduit', ['articlebyId'=>$articlebyId, 'touslescommentaires' => $commentaires]);
 	}
 
 	public function bymarque($idmarque) 
@@ -71,15 +75,6 @@ class Produit extends CI_Controller {
 		$produitbymarque=$this->Produit_model->produitparmarque($idmarque);
 		$this->load->view('produit/bymarque', ['datamarque'=>$datamarque, 'produitbymarque'=>$produitbymarque]);
 	}
-
-	public function trouveCommentparIDProduit($id_produit)
-	$this->load->model('Commentaire_model');
-	$commentaireparIDproduit=
-
-
-
-
-
 }
 
 ?>

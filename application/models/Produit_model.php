@@ -10,7 +10,6 @@ class Produit_model extends CI_Model
 		$this->db->limit($nb);
 		$requete= $this->db->get();
 		return $requete->result("Produit_model");
-
 	}
 
 	public function displayImage() 

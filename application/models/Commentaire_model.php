@@ -12,8 +12,8 @@ class Commentaire_Model extends CI_Model
 		/* je récupére les informations de mes champs via le paramétre
 		/* le tableau des données est situé dans le controller produit*/
 		
-
 		$this->db->insert('commentaire', $mon_commentaire);
+
 	}
 
 	public function displayImage() 
@@ -28,7 +28,8 @@ class Commentaire_Model extends CI_Model
 		$this->db->from('commentaire');
 		$this->db->where('id_produitDScomment',$id_produit);
 		$requete= $this->db->get();
-		return $requete->unbuffered_row("Produit_model");
-		var_dump($requete);
+		return $requete->result();
+	
+		
 	}
 }
