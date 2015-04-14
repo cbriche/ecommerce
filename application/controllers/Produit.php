@@ -2,22 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Produit extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
+	
 	public function detailproduit($id_produit)
 	{
 		$this->load->model('Produit_model');
@@ -38,8 +23,6 @@ class Produit extends CI_Controller {
 
 		// on load le commentaire comment qui va traiter la requete d'insert
 		$this->load->model('Commentaire_model');
-
-
 		if ($this->form_validation->run()==true) 
 		{
 
@@ -55,16 +38,29 @@ class Produit extends CI_Controller {
 
 			$this->session->set_flashdata('success_comment', 'Votre commentaire à été ajouté');
 			redirect("produit/detailproduit/".$id_produit);
-
 		}
 		
-		//$id_produit=$articlebyId->id_produit;
+		//j'envoie ma requete dans une variable
 		$commentaires = $this->Commentaire_model->trouveCommentparIDProduit($id_produit);
-				
+
+		$nbrecommentaires = $this->Commentaire_model->
+		CompteCommentparIDProduit($id_produit);
+
+		$moyennecommentaire=$this->Commentaire_model->
+		MoyenneCommentparIDProduit($id_produit);
+
 		/* on loade la page detail produit avec les infos*/
 
-		var_dump($commentaires);
-		$this->load->view('produit/detailproduit', ['articlebyId'=>$articlebyId, 'touslescommentaires' => $commentaires]);
+		// var_dump($commentaires);
+		// var_dump($nbrecommentaires);
+		var_dump ($moyennecommentaire);
+		$this->load->view('produit/detailproduit', 
+			[
+			'articlebyId'=>$articlebyId, 
+			'touslescommentaires' => $commentaires, 
+			'affiche_nbrecommentaire'=>$nbrecommentaires, 
+			'affiche_moyennecommentaire'=>$moyennecommentaire
+			]);
 	}
 
 	public function bymarque($idmarque) 
@@ -73,7 +69,11 @@ class Produit extends CI_Controller {
 		$this->load->model('Produit_model');
 		$datamarque=$this->Produit_model->datamarque($idmarque);
 		$produitbymarque=$this->Produit_model->produitparmarque($idmarque);
-		$this->load->view('produit/bymarque', ['datamarque'=>$datamarque, 'produitbymarque'=>$produitbymarque]);
+		$this->load->view('produit/bymarque', 
+			[
+			'datamarque'=>$datamarque,
+			'produitbymarque'=>$produitbymarque
+			]);
 	}
 }
 

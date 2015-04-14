@@ -21,7 +21,7 @@
             <img src="<?php echo $value->displayImage();?>" alt="<?php echo $value->nom_marque;?>">
           </div> <!--ferme div thumbail -->
             <p><?php echo character_limiter($value->descrip_marque,50);?> </p>
-            <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+            <p><a class="btn btn-default" href="<?php echo site_url("produit/bymarque/".$value->id_marque."");?>" role="button">Voir les produits de la marque</a></p>
           </div> <!--col-xs-6 col-lg-4"-->
         <?php endforeach ?>
       </div> <!--ferme div row-->
