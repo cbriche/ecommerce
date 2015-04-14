@@ -3,25 +3,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Categorie extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
+	public function bycategorie($Idcategorie)
 	{
 		//charge helper uniquement pour l'accueil.php
 		//$this->load->helper('url');
-		$this->load->view('categorie/allcaterogie');
+		// $this->load->view('categorie/allcaterogie');
+
+		$this->load->model('Produit_model');
+		$produitbycatego=$this->Produit_model->produitparcategorie($Idcategorie);
+
+		var_dump($produitbycatego);
+		$this->load->view('categorie/bycategorie',
+			[
+			'affiche_produitbycatego'=>$produitbycatego
+			]);
+
 	}
 }
+
+

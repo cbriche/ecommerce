@@ -51,6 +51,5 @@ class Commentaire_Model extends CI_Model
 		$this->db->where('id_produitDScomment',$id_produit);
 		$requete= $this->db->get("commentaire");
 		return $requete->unbuffered_row();
-		
 	}
 }

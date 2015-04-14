@@ -20,11 +20,27 @@ class Main extends CI_Controller {
 	 */
 	public function index()
 	{
-		//charge helper uniquement pour l'accueil.php
-		//	$this->load->helper('url'); // charger en autoloader
-		// $this->load->helper('text'); // charger en autoloader
+		//on monte les modèles de requetes que nous avons utilisés
 		$this->load->model('Produit_model');
+		$this->load->model('Commentaire_model');
+
+		//recupération des requetes
 		$Top5produits=$this->Produit_model->findLimit();
-		$this->load->view('accueil', ['Top5produits'=>$Top5produits]);
+		//$slider=$this->Produit_model->slider();
+
+			
+		//on déclare les informations que l'on devra charger dans la vue
+		//total des commentaires
+		//$nbrecommentaires = $this->Commentaire_model->CompteCommentparIDProduit($id_produit);
+
+		//moyenne des commmentaires
+		// $moyennecommentaire=$this->Commentaire_model->
+		// MoyenneCommentparIDProduit($id_produit);
+		
+
+		$this->load->view('accueil', [
+			'Top5produits'=>$Top5produits,
+		//	'Affiche_slider'=>$slider			
+			]);
 	}
 }

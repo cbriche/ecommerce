@@ -75,6 +75,7 @@ class Produit extends CI_Controller {
 			'produitbymarque'=>$produitbymarque
 			]);
 	}
+	
 }
 
 ?>
