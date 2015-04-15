@@ -25,7 +25,7 @@ class Produit extends CI_Controller {
 		$this->load->model('Commentaire_model');
 		if ($this->form_validation->run()==true) 
 		{
-
+			
 			$mon_commentaire = 
 			array(
 				'auteur_comment' => $this->input->post('auteur'),
@@ -53,7 +53,7 @@ class Produit extends CI_Controller {
 
 		// var_dump($commentaires);
 		// var_dump($nbrecommentaires);
-		var_dump ($moyennecommentaire);
+		//var_dump ($moyennecommentaire);
 		$this->load->view('produit/detailproduit', 
 			[
 			'articlebyId'=>$articlebyId, 
@@ -65,10 +65,11 @@ class Produit extends CI_Controller {
 
 	public function bymarque($idmarque) 
 	{
-		//var_dump($idmarque);
+		
 		$this->load->model('Produit_model');
 		$datamarque=$this->Produit_model->datamarque($idmarque);
 		$produitbymarque=$this->Produit_model->produitparmarque($idmarque);
+		
 		$this->load->view('produit/bymarque', 
 			[
 			'datamarque'=>$datamarque,

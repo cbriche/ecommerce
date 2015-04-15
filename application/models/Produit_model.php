@@ -46,18 +46,43 @@ class Produit_model extends CI_Model
 		return $requete->unbuffered_row("Produit_model");
 	}
 
+	public function datacatego($idcategorie)
+	{
+		$this->db->select('*');
+		$this->db->from('categorie');
+		$this->db->where('id_categorie',$idcategorie);
+		$requete= $this->db->get();
+		return $requete->unbuffered_row("Produit_model");
+	}
+
 	public function produitparcategorie($idcategorie)
 	{
 
 		//requete pour lister les catégories
-		$this->db->select('produit.*, categorie.nom_categorie');
+		$this->db->select('produit.*, categorie.descrip_catego, categorie.nom_categorie, marque.nom_marque');
 		$this->db->from('produit');
-		$this->db->join('produit_has_categorie', 'produit.id_produit=produit_has_categorie.produit_id_produit');
 		$this->db->join('categorie', 'categorie.id_categorie=produit_has_categorie.categorie_id_categorie');
+		$this->db->join('marque', 'marque.id_marque=produit.id_marqueDSproduit');
 		$this->db->where('produit_has_categorie.categorie_id_categorie',$idcategorie);
 		$requete= $this->db->get();
 		return $requete->result("Produit_model");
 	}
+
+	public function produitpanier($recupCookie) 
+	{
+		
+
+
+
+		//requete pour lister les produit du panier
+		$this->db->select('produit.*, marque.nom_marque');
+		$this->db->from('produit');
+		$this->db->join('marque', 'marque.id_marque=produit.id_marqueDSproduit');
+		$this->db->where_in('produit.id_produit',($recupCookie));
+		$requete= $this->db->get();
+		return $requete->result("Produit_model");
+	}
+
 
 	// public function slider()
 	// {

@@ -11,15 +11,43 @@
       <div class="row">
 
         <div class="col-md-9">
-
-          <div class="thumbnail">
-            <img class="img-responsive" src="<?php echo $articlebyId->displayImage();?>" alt="<?php echo $articlebyId->titre_produit;?>">
+          <div class="thumbnailitem">
+            <img class="img-responsiveitem" src="<?php echo $articlebyId->displayImage();?>" alt="<?php echo $articlebyId->titre_produit;?>">
             <div class="caption-full">
               <h4 class="pull-right">€<?php echo $articlebyId->prix_produit;?></h4>
               <h4><a href="#"><?php echo $articlebyId->titre_produit;?></a>
               </h4>
               <p><?php echo $articlebyId->descrip_produit;?></p>
             </div>
+            <div class="ajoutpanier">
+              <?php echo form_open("panier/ajout");?>
+
+              <div class="text-right">   
+          <?php echo form_label('Quantite', 'Quantie');?>
+          <?php $Qte=[
+          "id"=>'qte',
+          "name"=>"qte",
+          "type"=>"number",
+          "class"=>"text-right"];
+          echo form_input($Qte);?>
+
+           <?php $idProd=[
+          "id"=>'idprod',
+          "name"=>"idprod",
+          "type"=>"hidden",
+          "class"=>"text-right",
+          "value"=> $articlebyId->id_produit];
+          echo form_input($idProd);?>
+
+
+          <?php echo form_error('qte', '<div class="alert alert-danger">', '</div>'); ?>
+          <?= form_submit('panier/ajout', 'Ajouter au Panier', "class='btn btn-success', name='panier'");?>   
+        </div>
+
+              <?= form_close(); ?>
+            </div> <!--ferme div ajout panier-->
+          
+
             <div class="ratings">
               <p class="pull-right">
                 <?=$affiche_nbrecommentaire;?> Avis</p>
@@ -48,7 +76,7 @@
             </p>
           </div>
         </div>
-        <?php form_open("produit/detailproduit/".$articlebyId->id_produit);
+        <?php echo form_open("produit/detailproduit/".$articlebyId->id_produit);
 
         if (empty($affiche_nbrecommentaire)) 
         {
@@ -96,7 +124,7 @@
         </div>
 
         <div class="text-right">
-          <?= form_submit('mysubmit', 'Valider', "class='btn btn-success'");?>
+          <?= form_submit('mysubmit', 'Valider', "class='btn btn-success', name='avis'");?>
         </div>
         <?= form_fieldset_close(); ?>
         <?= $this->session->flashdata('success_comment');?>
