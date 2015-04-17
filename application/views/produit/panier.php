@@ -15,6 +15,7 @@
           </tr>
       </thead>
       <tbody>
+        <?php $PrixTotalHT=0; $MontantTVA=0; $TotalTTC=0;?>
         <?php foreach ($affiche_monpanier as $key => $value)  :?>
           <tr>
               <td class="col-sm-8 col-md-6">
@@ -30,46 +31,51 @@
                             </div>
                         </div></td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="<?php echo $recupCookie[$value->id_produit];?>">
+                        <a href="<?=site_url();?>/panier/action/down/<?php echo $value->id_produit ?>"><span class="glyphicon glyphicon-minus"></span></a>
+                        <span><?php echo $recupCookie[$value->id_produit]; ?></span>
+                        <a href="<?=site_url();?>/panier/action/up/<?php echo $value->id_produit ?>"><span class="glyphicon glyphicon-plus"></span></a>
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>€ <?php echo $value->prix_produit;?></strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>€ <?php echo $recupCookie[$value->id_produit] * $value->prix_produit;?> </strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>€ <?php echo $prixTotalligneProduit=$recupCookie[$value->id_produit] * $value->prix_produit;?> </strong></td>
                         <td class="col-sm-1 col-md-1">
-                        <button type="button" class="btn btn-danger">
+                          <a href="<?=site_url();?>/panier/action/supprimer/<?php echo $value->id_produit ?>"><button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Supprimer
-                        </button></td>
+                        </button></a>
+                        </td>
                     
                     </tr>
+                    <?php $PrixTotalHT+=$prixTotalligneProduit;?>
                     <?php endforeach ?>
                     <tr>
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
                         <td><h5>Sous Total HT</h5></td>
-                        <td class="text-right"><h5><strong>$24.59</strong></h5></td>
+                        <td class="text-right"><h5><strong><?php echo formatprix($PrixTotalHT);?></strong></h5></td>
                     </tr>
                     <tr>
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
-                        <td><h5>Estimation Livraison</h5></td>
-                        <td class="text-right"><h5><strong>$6.94</strong></h5></td>
+                        <td><h5>Montant TVA base 20%</h5></td>
+                        <td class="text-right"><h5><strong><?php  $MontantTVA=$PrixTotalHT * 0.2; echo formatprix($MontantTVA);?></strong></h5></td>
                     </tr>
                     <tr>
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
-                        <td><h3>Total HT</h3></td>
-                        <td class="text-right"><h3><strong>$31.53</strong></h3></td>
+                        <td><h3>Total TTC</h3></td>
+                        <td class="text-right"><h3><strong><?php $totalTTC=$PrixTotalHT+$MontantTVA;
+                        echo formatprix($totalTTC);?></strong></h3></td>
                     </tr>
                     <tr>
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
                         <td>
-                        <button type="button" class="btn btn-default">
+                        <a href="<?=site_url();?>#"><button type="button" class="btn btn-default">
                             <span class="glyphicon glyphicon-shopping-cart"></span> Continuer votre shopping
-                        </button></td>
+                        </button></a></td>
                         <td>
                         <button type="button" class="btn btn-success">
                             Passez votre commande <span class="glyphicon glyphicon-play"></span>

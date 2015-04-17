@@ -40,3 +40,20 @@ display: inline;
 {
 	width: 8%;
 }
+
+.text-muted
+{
+    color:#fff;
+    padding-left: 1em;
+
+}
+.text-message 
+{
+    color:#fff;
+    padding-left: 5em;
+}
+
+.poubelle 
+{
+    text-align: right;
+}

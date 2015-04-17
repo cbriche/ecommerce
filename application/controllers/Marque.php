@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Marque extends CI_Controller {
+class Marque extends MY_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -25,7 +25,7 @@ class Marque extends CI_Controller {
 	//je monte la requete
 		$touteslesmarques=$this->Marque_model->toutesmesmarques();
 	//je monte la vue avec le résultat de la requete
-		$this->load->view('marque/listemarque', ['touteslesmarques'=>$touteslesmarques]);
+		$this->render('marque/listemarque', ['touteslesmarques'=>$touteslesmarques]);
 
 	}
 

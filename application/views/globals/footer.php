@@ -21,7 +21,11 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-
+    <!--Déclaration var pour protection token-->
+    <script type="text/javascript">
+        var token_csrf = "<?php echo $this->security->get_csrf_hash(); ?>";
+        console.log(token_csrf);
+    </script>
+    <script src="<?php echo base_url();?>assets/js/chat.js"></script>
 </body>
-
 </html>

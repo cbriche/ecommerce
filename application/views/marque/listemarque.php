@@ -1,5 +1,5 @@
 <!--intégration du head, et navigation haute-->
-<?php $this->load->view('globals/header');?>
+
 <!-- Page Content -->
 <div class="container">
   <div class="row">
@@ -30,4 +30,3 @@
 </div> <!-- /.container -->
 
 <!--inclusion du footer-->
-<?php $this->load->view('globals/footer');?>

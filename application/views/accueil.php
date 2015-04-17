@@ -1,5 +1,5 @@
 <!--intégration du head, et navigation haute-->
-<?php $this->load->view('globals/header');?>
+
 <!-- Page Content -->
 <div class="container">
   <div class="row">
@@ -41,7 +41,7 @@
         <div class="thumbnail">
           <img src="<?php echo $value->displayImage();?>" alt="<?php echo $value->titre_produit;?>">
           <div class="caption">
-            <h5 class="pull-right">€<?php echo $value->prix_produit;?></h5>
+            <h5 class="pull-right"><?php echo formatprix($value->prix_produit);?></h5>
             <h4>
               <a href="<?php echo site_url("produit/detailproduit/".$value->id_produit."");?>">
                 <?php echo $value->titre_produit;?>
@@ -79,4 +79,3 @@
 </div> <!--ferme div contenair-->
 <!-- /.container -->
 <!--inclusion du footer-->
-<?php $this->load->view('globals/footer');?>

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>La boutique de Corinne</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +50,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="<?php echo site_url("Chat");?>">Chat</a>
                     </li>
                     <li>
                         <a href="#">Contact</a>

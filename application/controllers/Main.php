@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Main extends CI_Controller {
+class Main extends MY_Controller {
 
 	public function index()
 	{
@@ -19,7 +19,7 @@ class Main extends CI_Controller {
 		$Top5produits=$this->Produit_model->findLimit();
 				
 
-		$this->load->view('accueil', [
+		$this->render('accueil', [
 			'Top5produits'=>$Top5produits,
 		]);
 	}

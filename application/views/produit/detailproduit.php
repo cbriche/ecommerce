@@ -14,7 +14,7 @@
           <div class="thumbnailitem">
             <img class="img-responsiveitem" src="<?php echo $articlebyId->displayImage();?>" alt="<?php echo $articlebyId->titre_produit;?>">
             <div class="caption-full">
-              <h4 class="pull-right">€<?php echo $articlebyId->prix_produit;?></h4>
+              <h4 class="pull-right"><?php echo formatprix($articlebyId->prix_produit);?></h4>
               <h4><a href="#"><?php echo $articlebyId->titre_produit;?></a>
               </h4>
               <p><?php echo $articlebyId->descrip_produit;?></p>
@@ -23,7 +23,7 @@
               <?php echo form_open("panier/ajout");?>
 
               <div class="text-right">   
-          <?php echo form_label('Quantite', 'Quantie');?>
+          <?php echo form_label('Quantite', 'Quantite');?>
           <?php $Qte=[
           "id"=>'qte',
           "name"=>"qte",
